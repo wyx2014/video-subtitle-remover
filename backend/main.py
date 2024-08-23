@@ -536,6 +536,14 @@ class SubtitleRemover:
         self.mask_size = (int(self.video_cap.get(cv2.CAP_PROP_FRAME_HEIGHT)), int(self.video_cap.get(cv2.CAP_PROP_FRAME_WIDTH)))
         self.frame_height = int(self.video_cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
         self.frame_width = int(self.video_cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+
+        margin_x = 200
+        margin_y = 100
+        ymin = self.frame_height - margin_y
+        ymax = self.frame_height
+        xmin = self.frame_width - margin_x
+        xmax = self.frame_width        
+        self.sub_area = (ymin, ymax, xmin, xmax)
         # 创建字幕检测对象
         self.sub_detector = SubtitleDetect(self.video_path, self.sub_area)
         # 创建视频临时对象，windows下delete=True会有permission denied的报错
